@@ -177,7 +177,7 @@ class Sigmoid(Op):
 
     @staticmethod
     def forward(context, input):
-
+        input = np.clip(input, -500, 500)  # limit the range of input to avoid overflow
         sigx =  1 / (1 + np.exp(-input))
         context['sigx'] = sigx # store the sigmoid of x for the backward pass
         return sigx
